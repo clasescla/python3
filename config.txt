@@ -1,0 +1,7 @@
+[SERVIDOR]
+url_base_api = https://www.misitio.com.ar
+produccion = /produccion/v1
+
+[DATOS_CLIENTE]
+nombre = /cla
+mes = /febrero
