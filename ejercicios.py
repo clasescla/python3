@@ -126,9 +126,9 @@ numeros = [1, 3, 5, 7, 9]
 cuadrados = []
 
 
-########################################
-# EJERCICIO 10 - Desarrollo de funciones
-########################################
+#####################################################
+# EJERCICIO 10 - Desarrollo de funciones (1era parte)
+#####################################################
 
 # Escribir un módulo llamado estadisticas_simples.py y desarrollar tres funciones llamadas promedio, mediana, y moda.
 # Al pasarle una lista de números a cada función, debe devolver el valor promedio, la mediana, y la moda.
@@ -136,3 +136,10 @@ cuadrados = []
 # Aclaración: Si bien existe un módulo que devuelve las medidas mencionadas (statistics), este ejercicio puede considerarse como integrador del curso en su totalidad.
 # Para estar correctamente resuelto, este ejercicio no debe importar ningún módulo externo, aunque sí se permite emplear funciones incorporadas existentes (sum(), por ejemplo).
 # Ayuda: consultar en la ayuda de Python las funciones disponibles para las listas.
+
+
+####################################################
+# EJERCICIO 11 - Desarrollo de funciones (2da parte)
+####################################################
+
+# Implementar las funciones llenar_tabla y dar_formato en el archivo informe_sistema.py según se indica en este.

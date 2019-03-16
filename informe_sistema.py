@@ -10,7 +10,6 @@
 # 09-Mar-2019   Versión inicial                         Gabriel Cánepa (Carrera Linux Argentina)
 # 15-Mar-2019	Agregado reporte en formato Excel		Gabriel Cánepa (Carrera Linux Argentina)
 
-
 import conversiones as cv
 import json as j
 import platform as p
@@ -18,7 +17,6 @@ import psutil as ps
 from datetime import date
 from openpyxl import load_workbook, Workbook
 from openpyxl.worksheet.table import Table, TableStyleInfo
-
 
 # Variables auxiliares
 nombre_equipo = p.uname().node
@@ -30,6 +28,12 @@ def escribir_json(nombre_archivo, lista):
 	with open(nombre_archivo, 'w') as archivo:
 		j.dump(lista, archivo, indent = 4)
 
+def llenar_tabla():
+	pass
+	
+def dar_formato():
+	pass
+	
 # Almacenamiento usado
 uso_particiones = []
 for particion in ps.disk_partitions():
@@ -39,12 +43,9 @@ for particion in ps.disk_partitions():
 	info_particion = {'punto_montaje': punto_montaje, 'total': cv.bytes2human(total), 'uso_particion': uso_particion}
 	uso_particiones.append(info_particion)
 
-	
 # Escribir el contenido de uso_particiones al archivo particiones.json utilizando 4 espacios para la indentación
-with open('particiones.json', 'w') as particiones:
-	j.dump(uso_particiones, particiones, indent = 4)
+escribir_json('particiones.json', uso_particiones)
 
-	
 # Información sobre los 5 procesos que consumen más memoria
 # Los campos que se pueden utilizar están disponibles en la documentación de psutil: https://psutil.readthedocs.io/en/latest/
 info_procesos = []
@@ -53,11 +54,8 @@ for proceso in sorted(ps.process_iter(attrs = atributos_proceso),
 						key = lambda p: p.info['memory_percent'])[-5:]:
 	info_procesos.append(proceso.info)
 	
-
 # Escribir el contenido de info_procesos al archivo procesos.json utilizando 4 espacios para la indentación
-with open('info_procesos.json', 'w') as procesos:
-	j.dump(info_procesos, procesos, indent = 4)
-
+escribir_json('info_procesos.json', info_procesos)
 
 # Crear planilla de cálculo
 archivo_excel = Workbook()
@@ -66,6 +64,16 @@ archivo_excel.save('{}.xlsx'.format(reporte))
 # El archivo se crea con una única pestaña, activa por defecto, a la que damos el título 'Particiones'
 informe_particiones = archivo_excel.active
 informe_particiones.title = 'Particiones'
+
+# IMPORTANTE: Aunque el script en su forma actual funciona, las siguientes tres operaciones:
+# 1) Insertar títulos de columnas,
+# 2) Agregar datos de cada partición filas separadas, y
+# 3) Dar formato a la tabla
+# se repiten 2 veces (con ligeros cambios) al examinar la información sobre particiones primero y procesos luego.
+# Se deja como tarea al alumno implementar más arriba las funciones (utilizando los parámetros necesarios):
+# a) llenar_tabla
+# b) dar_formato
+# para evitar los problemas potenciales que resultan de duplicar código en un programa.
 
 # Títulos de columnas
 informe_particiones.append(['Punto de montaje', 'Espacio total', '% Uso'])
